@@ -11,9 +11,9 @@ namespace FootballGameProgram
         public int TeamNumber { get; private set; }
         public string Name { get; private set; }
         public int Goals { get; private set; }
-        public int TotalPower { get; private set; }
-        public int AttackPower { get; private set; }
-        public int DefencePower { get; private set; }
+        public double TotalPower { get; private set; }
+        public double AttackPower { get; private set; }
+        public double DefencePower { get; private set; }
         public bool HasAdvantage { get; private set; }
 
         public List<Forward> ForwardPlayers { get; private set; }
@@ -55,12 +55,12 @@ namespace FootballGameProgram
             GoalKeeper = goalKeeper;
         }
 
-        public int StartAttack()
+        public double StartAttack()
         {
             return AttackPower;
         }
 
-        public int DefendAttack()
+        public double DefendAttack()
         {
             return DefencePower;
         }

@@ -10,7 +10,6 @@ namespace FootballGameProgram
     {
         public int PlayerNumber { get; private set; }
         public string Name { get; private set; }
-        public int PowerLevel { get; private set; }
         public enum Position
         {
             Forward, MidFielder, Defender, GoalKeeper
@@ -18,15 +17,14 @@ namespace FootballGameProgram
         public Position position { get; private set; }
         public Team team { get; private set; }
 
-        public Player(int playerNumber, string name, int powerLevel, Position position, Team team)
+        public Player(int playerNumber, string name, Position position, Team team)
         {
             PlayerNumber = playerNumber;
             Name = name;
-            PowerLevel = powerLevel;
             this.position = position;
             this.team = team;
         }
 
-        public abstract string GetPlayerInfo();
+        public abstract string[] GetPlayerInfo();
     }
 }

@@ -8,6 +8,7 @@ namespace FootballGameProgram
 {
     public interface IDefend
     {
-        public int Defend();
+        public float Defend();
+        public bool CallTeamMate();
     }
 }

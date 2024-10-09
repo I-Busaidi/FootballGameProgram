@@ -8,7 +8,7 @@ namespace FootballGameProgram
 {
     public interface IAttack
     {
-        public int Shoot();
-        public int Pass();
+        public float Shoot();
+        public float Pass();
     }
 }
