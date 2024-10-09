@@ -10,7 +10,7 @@ namespace FootballGameProgram
     {
         public const float DefendMultiplier = 2F;
         public float DefendPower { get; private set; }
-        public GoalKeeper(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, position, team)
+        public GoalKeeper(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
             DefendPower = powerLevel * DefendMultiplier;
         }
@@ -28,7 +28,17 @@ namespace FootballGameProgram
 
         public bool CallTeamMate()
         {
-            return true;
+            bool CallSucceeded = false;
+            Random random = new Random();
+            int RolledNumber = random.Next(1, 100);
+
+            // Goalkeeper has a 70% chance to call a player to help in the defence.
+            if (RolledNumber >= 30)
+            {
+                CallSucceeded = true;
+            }
+
+            return CallSucceeded;
         }
     }
 }

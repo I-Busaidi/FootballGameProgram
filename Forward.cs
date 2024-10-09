@@ -12,7 +12,7 @@ namespace FootballGameProgram
         public float AttackPower { get; private set; }
 
 
-        public Forward(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, position, team)
+        public Forward(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
             AttackPower = powerLevel * AttackMultiplier;
         }
@@ -28,9 +28,18 @@ namespace FootballGameProgram
             return AttackPower;
         }
 
-        public float Pass()
+        public (float, bool) Pass()
         {
-            return AttackPower;
+            bool PassedBall = false;
+            Random random = new Random();
+            int RolledNumber = random.Next(1, 100);
+
+            // Forward position players have a 30% chance to pass the ball.
+            if (RolledNumber >= 70)
+            {
+                PassedBall = true;
+            }
+            return (PowerLevel, PassedBall);
         }
     }
 }

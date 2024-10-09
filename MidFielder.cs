@@ -12,7 +12,7 @@ namespace FootballGameProgram
         public const float DefendMultiplier = 0.5F;
         public float AttackPower { get; private set; }
         public float DefendPower { get; private set; }
-        public MidFielder(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, position, team)
+        public MidFielder(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
             AttackPower = powerLevel*AttackMultiplier;
             DefendPower = powerLevel*DefendMultiplier;
@@ -26,12 +26,21 @@ namespace FootballGameProgram
 
         public float Shoot()
         {
-            return AttackPower;
+            return PowerLevel;
         }
 
-        public float Pass()
+        public (float, bool) Pass()
         {
-            return AttackPower;
+            bool PassedBall = false;
+            Random random = new Random();
+            int RolledNumber = random.Next(1, 100);
+
+            // Midfielders have a 70% chance to pass the ball.
+            if (RolledNumber >= 30)
+            {
+                PassedBall = true;
+            }
+            return (AttackPower, PassedBall);
         }
 
         public float Defend()
@@ -41,7 +50,17 @@ namespace FootballGameProgram
 
         public bool CallTeamMate()
         {
-            return true;
+            bool CallSucceeded = false;
+            Random random = new Random();
+            int RolledNumber = random.Next(1, 100);
+
+            // Midfielders have a 30% chance to call another player to help in the defence.
+            if (RolledNumber >= 70)
+            {
+                CallSucceeded = true;
+            }
+
+            return CallSucceeded;
         }
     }
 }
