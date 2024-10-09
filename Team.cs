@@ -11,10 +11,11 @@ namespace FootballGameProgram
         public int TeamNumber { get; private set; }
         public string Name { get; private set; }
         public int Goals { get; private set; }
-        public double TotalPower { get; private set; }
-        public double AttackPower { get; private set; }
-        public double DefencePower { get; private set; }
-        public bool HasAdvantage { get; private set; }
+
+        private double TotalPower;
+        private double AttackPower;
+        private double DefencePower;
+        private bool HasAdvantage;
 
         public List<Forward> ForwardPlayers { get; private set; }
         public List<MidFielder> MidPlayers { get; private set; }
@@ -37,25 +38,25 @@ namespace FootballGameProgram
 
         public void AddForwardPlayer(Forward forwardPlayer)
         {
-            TotalPower += forwardPlayer.PowerLevel;
+            TotalPower += forwardPlayer.GetPowerLevel();
             ForwardPlayers.Add(forwardPlayer);
         }
 
         public void AddMidPlayer(MidFielder midFielder)
         {
-            TotalPower += midFielder.PowerLevel;
+            TotalPower += midFielder.GetPowerLevel();
             MidPlayers.Add(midFielder);
         }
 
         public void AddDefender(Defender defender)
         {
-            TotalPower += defender.PowerLevel;
+            TotalPower += defender.GetPowerLevel();
             Defenders.Add(defender);
         }
 
         public void AddGoalKeeper(GoalKeeper goalKeeper)
         {
-            TotalPower += goalKeeper.PowerLevel;
+            TotalPower += goalKeeper.GetPowerLevel();
             GoalKeeper = goalKeeper;
         }
 
@@ -139,7 +140,7 @@ namespace FootballGameProgram
             // Goalkeeper is always involved in the defence.
             if (GoalKeeper != null)
             {
-                DefencePower += GoalKeeper.DefendPower;
+                DefencePower += GoalKeeper.Defend();
                 CalledTeamMate = GoalKeeper.CallTeamMate();
             }
                 

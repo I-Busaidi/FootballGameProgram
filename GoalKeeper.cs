@@ -8,8 +8,8 @@ namespace FootballGameProgram
 {
     public class GoalKeeper: Player, IDefend
     {
-        public const float DefendMultiplier = 2F;
-        public float DefendPower { get; private set; }
+        private const float DefendMultiplier = 2F;
+        private float DefendPower;
         public GoalKeeper(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
             DefendPower = powerLevel * DefendMultiplier;

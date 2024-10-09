@@ -8,10 +8,10 @@ namespace FootballGameProgram
 {
     public class MidFielder : Player, IAttack, IDefend
     {
-        public const float AttackMultiplier = 1.5F;
-        public const float DefendMultiplier = 0.5F;
-        public float AttackPower { get; private set; }
-        public float DefendPower { get; private set; }
+        private const float AttackMultiplier = 1.5F;
+        private const float DefendMultiplier = 0.5F;
+        private float AttackPower;
+        private float DefendPower;
         public MidFielder(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
             AttackPower = powerLevel*AttackMultiplier;
@@ -26,7 +26,7 @@ namespace FootballGameProgram
 
         public float Shoot()
         {
-            return PowerLevel;
+            return GetPowerLevel();
         }
 
         public (float, bool) Pass()

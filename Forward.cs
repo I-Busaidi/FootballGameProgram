@@ -8,9 +8,8 @@ namespace FootballGameProgram
 {
     public class Forward : Player, IAttack
     {
-        public const float AttackMultiplier = 2F;
-        public float AttackPower { get; private set; }
-
+        private const float AttackMultiplier = 2F;
+        private float AttackPower;
 
         public Forward(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
@@ -39,7 +38,7 @@ namespace FootballGameProgram
             {
                 PassedBall = true;
             }
-            return (PowerLevel, PassedBall);
+            return (GetPowerLevel(), PassedBall);
         }
     }
 }
