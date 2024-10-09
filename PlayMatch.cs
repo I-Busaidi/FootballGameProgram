@@ -40,14 +40,17 @@ namespace FootballGameProgram
                 {
                     var Team1Attack = team1.StartAttack();
                     var Team2Defend = team2.DefendAttack();
+                    sb.AppendLine();
                     if (Team1Attack.Item3.Count == 0)
                     {
                         sb.AppendLine($"{team1.Name} are attacking!");
+                        sb.AppendLine();
                         sb.AppendLine($"{Team1Attack.Item2} is attempting to score!");
                     }
                     else if (Team1Attack.Item3.Count == 1)
                     {
                         sb.AppendLine($"{Team1Attack.Item3[0]} Passed the ball to {Team1Attack.Item2}!");
+                        sb.AppendLine();
                         sb.AppendLine($"{Team1Attack.Item2} is attempting to score!");
                     }
                     else
@@ -55,11 +58,13 @@ namespace FootballGameProgram
                         for (int j = 1; j < Team1Attack.Item3.Count; j++)
                         {
                             sb.AppendLine($"{Team1Attack.Item3[j - 1]} Passed the ball to {Team1Attack.Item3[j]}!");
+                            sb.AppendLine();
                         }
                         sb.AppendLine($"{Team1Attack.Item3[Team1Attack.Item3.Count - 1]} Passed the ball to {Team1Attack.Item2}!");
+                        sb.AppendLine();
                         sb.AppendLine($"{Team1Attack.Item2} is attempting to score!");
                     }
-
+                    sb.AppendLine();
                     if (Team1Attack.Item1 > Team2Defend)
                     {
                         team1.ScoreGoal();
@@ -69,21 +74,25 @@ namespace FootballGameProgram
                     {
                         sb.AppendLine($"The defence of {team2.Name} is too strong for {team1.Name} to overcome! and {team2.Name} were able to defend their goal!");
                     }
+                    sb.AppendLine();
                     sb.AppendLine($"Score: {team1.Name}:{team1.Goals} | {team2.Name}:{team2.Goals}");
                     team1Attacked = true;
                 }
                 else
                 {
+                    sb.AppendLine();
                     var Team2Attack = team2.StartAttack();
                     var Team1Defend = team1.DefendAttack();
                     if (Team2Attack.Item3.Count == 0)
                     {
                         sb.AppendLine($"{team2.Name} are attacking!");
+                        sb.AppendLine();
                         sb.AppendLine($"{Team2Attack.Item2} is attempting to score!");
                     }
                     else if (Team2Attack.Item3.Count == 1)
                     {
                         sb.AppendLine($"{Team2Attack.Item3[0]} Passed the ball to {Team2Attack.Item2}!");
+                        sb.AppendLine();
                         sb.AppendLine($"{Team2Attack.Item2} is attempting to score!");
                     }
                     else
@@ -91,11 +100,13 @@ namespace FootballGameProgram
                         for (int j = 1; j < Team2Attack.Item3.Count; j++)
                         {
                             sb.AppendLine($"{Team2Attack.Item3[j - 1]} Passed the ball to {Team2Attack.Item3[j]}!");
+                            sb.AppendLine();
                         }
                         sb.AppendLine($"{Team2Attack.Item3[Team2Attack.Item3.Count - 1]} Passed the ball to {Team2Attack.Item2}!");
+                        sb.AppendLine();
                         sb.AppendLine($"{Team2Attack.Item2} is attempting to score!");
                     }
-
+                    sb.AppendLine();
                     if (Team2Attack.Item1 > Team1Defend)
                     {
                         team2.ScoreGoal();
@@ -105,6 +116,7 @@ namespace FootballGameProgram
                     {
                         sb.AppendLine($"The defence of {team1.Name} is too strong for {team2.Name} to overcome! and {team1.Name} were able to defend their goal!");
                     }
+                    sb.AppendLine();
                     sb.AppendLine($"Score: {team1.Name}:{team1.Goals} | {team2.Name}:{team2.Goals}");
                     team1Attacked = false;
                 }
