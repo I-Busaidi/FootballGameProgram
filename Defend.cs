@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
-    public interface Defend
+    public interface IDefend
     {
+        public int Defend();
     }
 }

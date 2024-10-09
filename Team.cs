@@ -8,20 +8,22 @@ namespace FootballGameProgram
 {
     public class Team
     {
-        public string Name { get; set; }
-        public int Goals { get; set; }
-        public int TotalPower { get; set; }
-        public int AttackPower { get; set; }
-        public int DefencePower { get; set; }
-        public bool HasAdvantage { get; set; }
+        public int TeamNumber { get; private set; }
+        public string Name { get; private set; }
+        public int Goals { get; private set; }
+        public int TotalPower { get; private set; }
+        public int AttackPower { get; private set; }
+        public int DefencePower { get; private set; }
+        public bool HasAdvantage { get; private set; }
 
-        public List<Forward> ForwardPlayers { get; set; }
-        public List<MidFielder> MidPlayers { get; set; }
-        public List<Defender> Defenders { get; set; }
-        public GoalKeeper GoalKeeper { get; set; }
+        public List<Forward> ForwardPlayers { get; private set; }
+        public List<MidFielder> MidPlayers { get; private set; }
+        public List<Defender> Defenders { get; private set; }
+        public GoalKeeper? GoalKeeper { get; private set; }
 
-        public Team(string Name)
+        public Team(int TeamNumber, string Name)
         {
+            this.TeamNumber = TeamNumber;
             this.Name = Name;
             Goals = 0;
             TotalPower = 0;
@@ -48,6 +50,11 @@ namespace FootballGameProgram
             Defenders.Add(defender);
         }
 
+        public void AddGoalKeeper(GoalKeeper goalKeeper)
+        {
+            GoalKeeper = goalKeeper;
+        }
+
         public int StartAttack()
         {
             return AttackPower;
@@ -56,6 +63,11 @@ namespace FootballGameProgram
         public int DefendAttack()
         {
             return DefencePower;
+        }
+
+        public void ScoreGoal()
+        {
+            Goals += 1;
         }
     }
 }

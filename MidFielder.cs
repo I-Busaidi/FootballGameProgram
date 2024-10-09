@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
-    public class MidFielder
+    public class MidFielder : Player, IAttack
     {
+        public MidFielder(int playerNumber, string name, int powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
+        {
+
+        }
+
+        public override string GetPlayerInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+            return sb.ToString();
+        }
+
+        
     }
 }

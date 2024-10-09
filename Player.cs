@@ -27,6 +27,6 @@ namespace FootballGameProgram
             this.team = team;
         }
 
-        public abstract void GetPlayerInfo();
+        public abstract string GetPlayerInfo();
     }
 }

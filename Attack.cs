@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
-    public interface Attack
+    public interface IAttack
     {
+        public int Shoot();
+        public int Pass();
     }
 }
