@@ -52,7 +52,7 @@ namespace FootballGameProgram
                     }
                     else
                     {
-                        for (int j = 1; j < Team1Attack.Item3.Count; i++)
+                        for (int j = 1; j < Team1Attack.Item3.Count; j++)
                         {
                             sb.AppendLine($"{Team1Attack.Item3[j - 1]} Passed the ball to {Team1Attack.Item3[j]}!");
                         }
@@ -88,7 +88,7 @@ namespace FootballGameProgram
                     }
                     else
                     {
-                        for (int j = 1; j < Team2Attack.Item3.Count; i++)
+                        for (int j = 1; j < Team2Attack.Item3.Count; j++)
                         {
                             sb.AppendLine($"{Team2Attack.Item3[j - 1]} Passed the ball to {Team2Attack.Item3[j]}!");
                         }
@@ -117,11 +117,11 @@ namespace FootballGameProgram
             string Result;
             if (team1.Goals > team2.Goals)
             {
-                Result = $"{team1} has won the match by a score of {team1.Goals} to {team2.Goals}!";
+                Result = $"{team1.Name} has won the match by a score of {team1.Goals} to {team2.Goals}!";
             }
             else if (team1.Goals < team2.Goals)
             {
-                Result = $"{team2} has won the match by a score of {team2.Goals} to {team1.Goals}!";
+                Result = $"{team2.Name} has won the match by a score of {team2.Goals} to {team1.Goals}!";
             }
             else
             {

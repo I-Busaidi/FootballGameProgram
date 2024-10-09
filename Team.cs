@@ -119,7 +119,7 @@ namespace FootballGameProgram
                         else
                         {
                             AttackPower += ForwardPlayers[IndexOfAttacker].Shoot();
-                            NameOfBallShooter = MidPlayers[IndexOfMidPlayer].Name;
+                            NameOfBallShooter = ForwardPlayers[IndexOfAttacker].Name;
                         }
 
                         IndexOfAttacker++;
