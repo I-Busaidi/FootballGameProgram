@@ -60,8 +60,9 @@ namespace FootballGameProgram
             GoalKeeper = goalKeeper;
         }
 
-        public (double, string) StartAttack()
+        public (double, string, List<string>) StartAttack()
         {
+            List<string> PassersNames = new List<string>();
             string NameOfBallShooter;
             int NumberOfPossiblePasses = MidPlayers.Count + ForwardPlayers.Count;
             int PassesCount = 0;
@@ -94,6 +95,7 @@ namespace FootballGameProgram
                         PassOrShoot = MidPlayers[IndexOfMidPlayer].Pass();
                         if (PassOrShoot.Item2)
                         {
+                            PassersNames.Add(MidPlayers[IndexOfMidPlayer].Name);
                             AttackPower += PassOrShoot.Item1;
                             PassesCount++;
                         }
@@ -110,6 +112,7 @@ namespace FootballGameProgram
                         PassOrShoot = ForwardPlayers[IndexOfAttacker].Pass();
                         if (PassOrShoot.Item2)
                         {
+                            PassersNames.Add(ForwardPlayers[IndexOfAttacker].Name);
                             AttackPower += PassOrShoot.Item1;
                             PassesCount++;
                         }
@@ -124,7 +127,7 @@ namespace FootballGameProgram
                 }
             }
 
-            return (AttackPower, NameOfBallShooter);
+            return (AttackPower, NameOfBallShooter, PassersNames);
         }
 
         public double DefendAttack()
