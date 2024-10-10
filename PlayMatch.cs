@@ -15,7 +15,7 @@ namespace FootballGameProgram
         {
             this.team1 = team1;
             this.team2 = team2;
-            MatchStartMessage = $"Ladies and gentlemen, welcome!\nToday we have a very anticipated match between {team1.Name} and {team2.Name}!\nLet the game begin!";
+            MatchStartMessage = $"Ladies and gentlemen, welcome!\nToday we have a very anticipated match between {team1.Name} and {team2.Name}!\nLet the game begin!\n\n";
         }
 
         public string PlayHalf()
@@ -23,8 +23,12 @@ namespace FootballGameProgram
             StringBuilder sb = new StringBuilder();
             Random random = new Random();
             int CoinFlip = random.Next(0, 2);
+
+            // Getting the number of turns (min: 4, max: 10)
             int NumberOfTurns = random.Next(4, 11);
             bool team1Attacked = false;
+
+            // Starting team is decided by the coin flip (random 0 or 1)
             if (CoinFlip == 0)
             {
                 sb.AppendLine($"Team {team1.Name} is starting the kickoff!");
@@ -36,10 +40,14 @@ namespace FootballGameProgram
             }
             for (int i = 0; i < NumberOfTurns; i++)
             {
+                // If team 1 is starting first then initiate a team 1 attack and team 2 defence,
+                // then alternate for a number of turns decided by the random generator.
                 if (!team1Attacked)
                 {
                     var Team1Attack = team1.StartAttack();
                     var Team2Defend = team2.DefendAttack();
+                    sb.AppendLine();
+                    sb.AppendLine($"{team1.Name}'s Turn to Attack:");
                     sb.AppendLine();
                     if (Team1Attack.Item3.Count == 0)
                     {
@@ -76,10 +84,15 @@ namespace FootballGameProgram
                     }
                     sb.AppendLine();
                     sb.AppendLine($"Score: {team1.Name}:{team1.Goals} | {team2.Name}:{team2.Goals}");
+                    sb.AppendLine("-----------------------------------------------------------------");
                     team1Attacked = true;
                 }
+
+                // Team 2 turn, starts after team 1 attacks or if they win the coin flip.
                 else
                 {
+                    sb.AppendLine();
+                    sb.AppendLine($"{team2.Name}'s Turn to Attack:");
                     sb.AppendLine();
                     var Team2Attack = team2.StartAttack();
                     var Team1Defend = team1.DefendAttack();
@@ -118,6 +131,7 @@ namespace FootballGameProgram
                     }
                     sb.AppendLine();
                     sb.AppendLine($"Score: {team1.Name}:{team1.Goals} | {team2.Name}:{team2.Goals}");
+                    sb.AppendLine("-----------------------------------------------------------------");
                     team1Attacked = false;
                 }
             }

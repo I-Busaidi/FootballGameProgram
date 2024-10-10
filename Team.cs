@@ -62,6 +62,7 @@ namespace FootballGameProgram
 
         public (double, string, List<string>) StartAttack()
         {
+            // This list saves the name of attacking players that pass the ball.
             List<string> PassersNames = new List<string>();
             string NameOfBallShooter;
             int NumberOfPossiblePasses = MidPlayers.Count + ForwardPlayers.Count;
@@ -79,9 +80,12 @@ namespace FootballGameProgram
             var PassOrShoot = MidPlayers[0].Pass();
             AttackPower += PassOrShoot.Item1;
 
+            // Loop continues while passes done are less than possiblr passes, and if the current player passes the ball,
+            // and the team still has players that can attack and did not recieve the ball yet.
             while (PassesCount < NumberOfPossiblePasses && PassOrShoot.Item2 
                 && (IndexOfMidPlayer < MidPlayers.Count || IndexOfAttacker < ForwardPlayers.Count))
             {
+                // If the last player gets the ball he does not attempt to pass, but shoot the ball instead
                 if(PassesCount == NumberOfPossiblePasses -1)
                 {
                     AttackPower += ForwardPlayers[IndexOfAttacker].Shoot();
@@ -90,6 +94,7 @@ namespace FootballGameProgram
                 }
                 else
                 {
+                    // Perform this part if there is mid players remaining.
                     if(IndexOfMidPlayer < MidPlayers.Count)
                     {
                         PassOrShoot = MidPlayers[IndexOfMidPlayer].Pass();
@@ -107,6 +112,8 @@ namespace FootballGameProgram
 
                         IndexOfMidPlayer++;
                     }
+
+                    // Perform this part if there is forward players remaining.
                     else if (IndexOfAttacker < ForwardPlayers.Count)
                     {
                         PassOrShoot = ForwardPlayers[IndexOfAttacker].Pass();
@@ -149,9 +156,11 @@ namespace FootballGameProgram
                 
             int DefendTries = 0;
 
+            // Loop while there is defenders/midfielders that did not take part yet and if current defender calls a teammate successfully.
             while (DefendTries < NumberOfPossibleDefenders && CalledTeamMate 
                 && (IndexOfDefender < Defenders.Count || IndexOfMidPlayer < MidPlayers.Count))
             {
+                // Priority if for defenders, then midfielders.
                 if (IndexOfDefender < Defenders.Count)
                 {
                     DefencePower += Defenders[IndexOfDefender].Defend();

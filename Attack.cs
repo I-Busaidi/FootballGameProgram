@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
+    // Interface used by Forward and Midfield players.
     public interface IAttack
     {
         public float Shoot();

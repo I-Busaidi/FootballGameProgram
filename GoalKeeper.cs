@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
+    // Inheriting Player and implementing IDefend
     public class GoalKeeper: Player, IDefend
     {
         private const float DefendMultiplier = 2F;
         private float DefendPower;
         public GoalKeeper(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
+            // Increased contributed power when defending (x2).
             DefendPower = powerLevel * DefendMultiplier;
         }
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
+    // Inheriting Player and implementing IAttack
     public class Forward : Player, IAttack
     {
         private const float AttackMultiplier = 2F;
@@ -13,6 +14,7 @@ namespace FootballGameProgram
 
         public Forward(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
+            // increased attack power that is used when shooting at goal (x2).
             AttackPower = powerLevel * AttackMultiplier;
         }
 
@@ -24,6 +26,7 @@ namespace FootballGameProgram
 
         public float Shoot()
         {
+            // Forward players add their attack modifier to their contributed power level during the attack if they shoot the ball.
             return AttackPower;
         }
 
@@ -38,6 +41,7 @@ namespace FootballGameProgram
             {
                 PassedBall = true;
             }
+            // If forward Players pass, they do not add the attack modifier to their contributed attack power.
             return (GetPowerLevel(), PassedBall);
         }
     }

@@ -1,9 +1,13 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FootballGameProgram
 {
     internal class Program
     {
+
+        static string NameFormat = @"^[A-Za-z]+(?: [A-Za-z]+)*$";
+        // List of names that will be used to pick names for the players.
         static List<string> NamesPool = new List<string>() {
             "Lionel Messi",
             "Cristiano Ronaldo",
@@ -60,7 +64,9 @@ namespace FootballGameProgram
             Console.WriteLine("Welcome To The Football Game Simulator!");
             Console.Write("\nEnter the 1st team name: ");
             string Team1Name;
-            while (string.IsNullOrEmpty(Team1Name = Console.ReadLine()))
+            // Validating the name input to not be empty and does not contain more than 1 space between each part.
+            while (string.IsNullOrEmpty(Team1Name = Console.ReadLine()) 
+                || (!Regex.IsMatch(Team1Name, NameFormat)))
             {
                 Console.Clear();
                 Console.WriteLine("Invalid Input, please try again.");
@@ -70,13 +76,17 @@ namespace FootballGameProgram
             Console.Clear();
             Console.Write("\nEnter the 2nd team name: ");
             string Team2Name;
-            while (string.IsNullOrEmpty(Team2Name = Console.ReadLine()))
+            // Same validation with addition to name not matching the other team's name.
+            while (string.IsNullOrEmpty(Team2Name = Console.ReadLine()) 
+                || Team2Name.ToLower().Trim() == Team1Name.ToLower().Trim() 
+                || (!Regex.IsMatch(Team2Name, NameFormat)))
             {
                 Console.Clear();
                 Console.WriteLine("Invalid Input, please try again.");
                 Console.Write("\nEnter the 2nd team name: ");
             }
 
+            // Creating 2 objects of Team class and assigning a name to each team.
             Team team1 = new Team(1, Team1Name);
             Team team2 = new Team(2, Team2Name);
 
@@ -94,7 +104,9 @@ namespace FootballGameProgram
             Console.ReadKey();
             Console.Clear();
 
+            // Creating a new PlayMatch object, and giving it the 2 teams created above.
             PlayMatch Match = new PlayMatch(team1, team2);
+            // Printing the match message which is created in the PlayMatch class.
             Console.WriteLine(Match.MatchStartMessage);
 
             Console.WriteLine("First Half\n");
@@ -115,6 +127,7 @@ namespace FootballGameProgram
             Console.WriteLine(Match.MatchResult());
         }
 
+        // This function adds 11 players to each team and assigns a position for them and generates power level.
         static string AddPlayers(Team team)
         {
             StringBuilder sb = new StringBuilder();
@@ -124,6 +137,8 @@ namespace FootballGameProgram
             string border = new string('-', 60);
             sb.AppendLine(border);
             Random random = new Random();
+
+            // Assigning at least 1 player to each role initially.
             int RandomSkillGenerator = random.Next(1, 100);
             int RandomNameIndex = random.Next(0, NamesPool.Count);
             team.AddGoalKeeper(new GoalKeeper(1, NamesPool[RandomNameIndex], RandomSkillGenerator, Player.Position.GoalKeeper, team));
@@ -151,6 +166,8 @@ namespace FootballGameProgram
             int playerNumber = 5;
 
             int RandomPlayerAssignment;
+
+            // Assigning the rest of a role randomly except for goalkeeper.
             for (int i = 0; i < 7; i++)
             {
                 RandomSkillGenerator = random.Next(1, 100);

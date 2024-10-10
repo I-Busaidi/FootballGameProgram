@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballGameProgram
 {
+    // Inheriting Player and implementing IAttack + IDefend
     public class MidFielder : Player, IAttack, IDefend
     {
         private const float AttackMultiplier = 1.5F;
@@ -14,7 +15,9 @@ namespace FootballGameProgram
         private float DefendPower;
         public MidFielder(int playerNumber, string name, float powerLevel, Position position, Team team) : base(playerNumber, name, powerLevel, position, team)
         {
+            // Increased attack power contribution when passing (x1.5).
             AttackPower = powerLevel*AttackMultiplier;
+            // Decreased defence power contribution when defending (x0.5).
             DefendPower = powerLevel*DefendMultiplier;
         }
 
@@ -26,6 +29,7 @@ namespace FootballGameProgram
 
         public float Shoot()
         {
+            // Midfielders do not add their modifier to attack power if the shoot instead of passing.
             return GetPowerLevel();
         }
 
@@ -40,6 +44,7 @@ namespace FootballGameProgram
             {
                 PassedBall = true;
             }
+            // When midfielders pass, they add extra power to the contributed attack power.
             return (AttackPower, PassedBall);
         }
 
